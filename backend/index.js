@@ -3,6 +3,10 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 app.use(express.json());
+const connectDB = require("./src/config/db");
+
+// Connect MongoDB
+connectDB();
 
 // API test
 app.get("/", (req, res) => {
