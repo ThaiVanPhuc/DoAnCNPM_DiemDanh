@@ -1,16 +1,13 @@
 const mongoose = require("mongoose");
 
-require("dotenv").config();
-
 const connectDB = async () => {
   try {
-    // const conn = await mongoose.connect(process.env.MONGO_URI);
     const conn = await mongoose.connect(
-      "mongodb+srv://an100277:AeeReISLciRp5Aqf@binhan.awftk.mongodb.net/DoAnCNPM?appName=binhan"
+      "mongodb+srv://an100277:AeeReISLciRp5Aqf@binhan.awftk.mongodb.net/DoAnCNPM?retryWrites=true&w=majority"
     );
-    console.log("MongoDB Connected....", conn.connection.host);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
-    console.error("MongoDB Connection fail...", error);
+    console.error("Lỗi kết nối MongoDB:", error.message);
     process.exit(1);
   }
 };
