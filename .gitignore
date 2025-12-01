@@ -1,2 +1,5 @@
 backend/node_modules
 frontend-react/node_modules
+venv/
+.env/
+__pycache__/
