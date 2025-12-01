@@ -1,5 +1,21 @@
-backend/node_modules
-frontend-react/node_modules
-venv/
-.env/
+# Node
+backend/node_modules/
+frontend-react/node_modules/
+
+# Python
+face-training-python/venv/
+face-training-python/__pycache__/
+face-training-python/**/*.pyc
 __pycache__/
+*.pyc
+
+# Environment
+.env
+*.env
+
+# Uploads
+face-training-python/uploads/
+uploads/
+
+# Others
+.DS_Store
