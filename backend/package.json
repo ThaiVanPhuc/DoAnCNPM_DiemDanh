@@ -3,16 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
   },
-  "keywords": [
-    "face-recognition",
-    "face-training",
-    "api",
-    "express"
-  ],
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
