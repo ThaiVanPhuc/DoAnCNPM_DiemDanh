@@ -1,0 +1,44 @@
+:root {
+  --gradient-blue-purple: linear-gradient(135deg, #4ea1ff, #6a5acd);
+  --color-blue: #4ea1ff;
+  --color-purple: #6a5acd;
+  --color-purple-dark: #5948c7;
+}
+
+.modal-header {
+  background: var(--gradient-blue-purple);
+  color: white;
+}
+
+.btn-primary {
+  background: var(--gradient-blue-purple) !important;
+  border: none !important;
+  color: white !important;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #3b8ee3, #5948c7) !important;
+}
+
+.btn-close {
+  filter: brightness(10);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--color-purple) !important;
+  box-shadow: 0 0 0 0.2rem rgba(106, 90, 205, 0.4) !important;
+}
+
+.modal-content {
+  border-radius: 14px;
+  overflow: hidden;
+}
+.avatar-preview {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #6a5acd;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
