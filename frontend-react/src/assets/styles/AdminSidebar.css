@@ -1,0 +1,53 @@
+.admin-sidebar {
+  width: 260px;
+  min-height: 120vh;
+  background-color: #6a5acd; 
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: 0.3s ease;
+}
+
+.admin-sidebar.collapsed {
+  width: 80px;
+}
+
+.admin-logo {
+  font-size: 22px;
+  font-weight: 700;
+  font-family: "Poppins";
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+
+.admin-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.admin-sidebar li {
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: background 0.2s ease;
+}
+
+.admin-sidebar li:hover {
+  background: #5948c7;
+}
+
+.admin-sidebar li.active {
+  background: #4836c7;
+}
+
+.admin-sidebar li svg {
+  font-size: 18px;
+}

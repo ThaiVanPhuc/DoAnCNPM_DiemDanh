@@ -1,0 +1,153 @@
+.header {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #4b0082, #6a5acd);
+  color: #fff;
+  padding: 14px 40px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  gap: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ebe9ee;
+  text-shadow: 0 0 4px rgba(177, 156, 217, 0.6);
+  flex: 1;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex: 2;
+}
+
+.nav a {
+  color: #eae6ff;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: 0.3s ease;
+}
+
+.nav a:hover {
+  color: #c5b3ff;
+  transform: scale(1.05);
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 30px;
+  padding: 5px 12px;
+  flex: 1.5;
+  max-width: 300px;
+}
+
+.search-bar input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #fff;
+  padding: 7px 10px;
+  font-size: 0.95rem;
+}
+
+.search-bar input::placeholder {
+  color: #e3d9ff;
+}
+
+.search-bar button {
+  border: none;
+  background: none;
+  color: #d8b4ff;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: transform 0.25s;
+}
+
+.search-bar button:hover {
+  transform: scale(1.2);
+}
+
+.auth-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.auth-section a {
+  color: #eae6ff;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.auth-section a:hover {
+  color: #d5c6ff;
+}
+
+/* Nút Profile */
+.profile-btn {
+  background-color: #7c4dff;
+  padding: 6px 14px;
+  border-radius: 6px;
+  color: white !important;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.profile-btn:hover {
+  background-color: #9575ff;
+}
+
+/* Nút Logout */
+.logout-btn {
+  background-color: #ff5370;
+  padding: 6px 14px;
+  border-radius: 6px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #ff6e85;
+}
+
+@media (max-width: 900px) {
+  .header {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px 20px;
+  }
+
+  .nav {
+    order: 2;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .search-bar {
+    order: 3;
+    width: 100%;
+    max-width: none;
+  }
+
+  .auth-section {
+    order: 4;
+    width: 100%;
+    justify-content: center;
+  }
+}

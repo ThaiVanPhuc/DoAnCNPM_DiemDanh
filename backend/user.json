@@ -1,0 +1,54 @@
+[
+  {
+    "userId": 1,
+    "fullName": "Le Thu Thao",
+    "email": "thao@gmail.com",
+    "password": "123456",
+    "phone": "0987654321",
+    "avatarUrl": "https://i.pravatar.cc/150?img=1",
+    "address": "123 Le Loi, Hanoi",
+    "gender": "male",
+    "birthday": "2000-01-01",
+    "role": "STUDENT",
+    "classId": null
+  },
+  {
+    "userId": 2,
+    "fullName": "Tran Thi B",
+    "email": "b@gmail.com",
+    "password": "123456",
+    "phone": "0987654322",
+    "avatarUrl": "https://i.pravatar.cc/150?img=2",
+    "address": "456 Tran Hung Dao, Hanoi",
+    "gender": "female",
+    "birthday": "2001-02-02",
+    "role": "STUDENT",
+    "classId": null
+  },
+  {
+    "userId": 3,
+    "fullName": "Le Van C",
+    "email": "c@gmail.com",
+    "password": "123456",
+    "phone": "0987654323",
+    "avatarUrl": "https://i.pravatar.cc/150?img=3",
+    "address": "789 Hai Ba Trung, Hanoi",
+    "gender": "male",
+    "birthday": "1995-03-03",
+    "role": "TEACHER",
+    "classId": null
+  },
+  {
+    "userId": 4,
+    "fullName": "Pham Thi D",
+    "email": "d@gmail.com",
+    "password": "123456",
+    "phone": "0987654324",
+    "avatarUrl": "https://i.pravatar.cc/150?img=4",
+    "address": "321 Nguyen Trai, Hanoi",
+    "gender": "female",
+    "birthday": "1990-04-04",
+    "role": "TEACHER",
+    "classId": null
+  }
+]

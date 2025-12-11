@@ -1,0 +1,13 @@
+form {
+  border-radius: 12px !important;
+}
+
+input, select {
+  border-radius: 8px !important;
+}
+
+button {
+  font-size: 17px;
+  font-weight: 600;
+  border-radius: 8px !important;
+}

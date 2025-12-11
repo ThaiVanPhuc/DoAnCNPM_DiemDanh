@@ -1,0 +1,13 @@
+.profile-form-card {
+  max-width: 700px;
+  border-radius: 15px;
+}
+
+.avatar-preview {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #6a5acd;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
