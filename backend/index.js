@@ -8,12 +8,19 @@ const app = express();
 const connectDB = require("./src/config/db.js");
 const userRoutes = require("./src/routes/userRoutes");
 const authRoutes = require("./src/routes/authRoutes");
+const classRoutes = require("./src/routes/classRoutes");
+const attendanceRoutes = require("./src/routes/attendanceRoutes");
 
 
 connectDB();
 
 app.use(cors());
 app.use(express.json());
+app.use("/auth", authRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/classes", classRoutes);
+app.use("/api/attendance", attendanceRoutes);
+
 
 
 // Tạo thư mục uploads nếu chưa có
