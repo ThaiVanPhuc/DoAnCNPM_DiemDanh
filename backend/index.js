@@ -5,14 +5,16 @@ const path = require("path");
 const fs = require("fs");
 
 const app = express();
-const connectDB = require("./src/config/db");
+const connectDB = require("./src/config/db.js");
 const userRoutes = require("./src/routes/userRoutes");
 const authRoutes = require("./src/routes/authRoutes");
+
 
 connectDB();
 
 app.use(cors());
 app.use(express.json());
+
 
 // Tạo thư mục uploads nếu chưa có
 const uploadDir = "uploads";
