@@ -1,2 +1,16 @@
-backend/node_modules
-frontend-react/node_modules
+# Node
+backend/node_modules/
+frontend-react/node_modules/
+
+# Python
+face-training-python/venv/
+face-training-python/__pycache__/
+**/__pycache__/
+*.pyc
+
+# Data / model
+face-training-python/face_data/uploads/
+face-training-python/face_data/*.pkl
+
+# OS
+.DS_Store
