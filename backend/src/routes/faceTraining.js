@@ -44,10 +44,10 @@ const upload = multer({
 
 // ==================== ROUTES ====================
 
-// 1. Upload ảnh chân dung (single file)
+// 1. Upload ảnh chân dung (single file) - field name MUST be "image"
 router.post('/upload-face', upload.single('image'), faceTrainingController.uploadFace);
 
-// 2. Upload nhiều ảnh cùng lúc
+// 2. Upload nhiều ảnh cùng lúc - field name MUST be "images"
 router.post('/upload-multiple-faces', upload.array('images', 10), faceTrainingController.uploadMultipleFaces);
 
 // 3. Chụp ảnh webcam (base64)
