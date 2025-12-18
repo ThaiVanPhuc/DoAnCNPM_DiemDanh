@@ -35,8 +35,8 @@ const attendanceSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-// Tự động tăng attendanceId
-attendanceSchema.pre('save', async function(next) {
+// DUY NHẤT 1 PRE-SAVE HOOK – TĂNG ATTENDANCEID
+attendanceSchema.pre('save', { document: true, query: false }, async function () {
   try {
     if (this.isNew) {
       const counter = await Counter.findByIdAndUpdate(
@@ -46,9 +46,8 @@ attendanceSchema.pre('save', async function(next) {
       );
       this.attendanceId = counter.seq;
     }
-    next();
   } catch (error) {
-    next(error);
+    throw error;
   }
 });
 

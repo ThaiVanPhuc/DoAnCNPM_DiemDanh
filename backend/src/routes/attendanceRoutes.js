@@ -5,13 +5,13 @@ const attendanceController = require('../controllers/attendanceController');
 const authMiddleware = require('../middleware/authMiddleware');
 const roleMiddleware = require('../middleware/roleMiddleware');
 
-// Chỉ ADMIN/TEACHER ghi điểm danh
+// Ghi điểm danh
 router.post('/record', authMiddleware, roleMiddleware(['ADMIN', 'TEACHER']), attendanceController.recordAttendance);
 
-// Xem báo cáo (ADMIN/TEACHER xem toàn bộ, STUDENT xem cá nhân - thêm logic trong controller nếu cần)
+// Xem báo cáo
 router.get('/report', authMiddleware, attendanceController.getAttendanceReport);
 
-// Thống kê cho biểu đồ
+// Thống kê
 router.get('/statistics', authMiddleware, attendanceController.getAttendanceStatistics);
 
 // Xuất file

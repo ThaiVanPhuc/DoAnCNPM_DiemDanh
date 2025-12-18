@@ -1,3 +1,4 @@
+// src/middleware/roleMiddleware.js
 module.exports = (allowedRoles = []) => {
   return (req, res, next) => {
     if (!req.user) {

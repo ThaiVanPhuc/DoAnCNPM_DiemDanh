@@ -1,7 +1,5 @@
 // src/models/classModel.js
 const mongoose = require("mongoose");
-
-// Require Counter từ file riêng
 const Counter = require("./counterModel");
 
 const classSchema = new mongoose.Schema(
@@ -21,6 +19,7 @@ const classSchema = new mongoose.Schema(
     teacherId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      default: null,
     },
     studentCount: {
       type: Number,
@@ -30,8 +29,8 @@ const classSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Tự động tăng classId
-classSchema.pre('save', async function(next) {
+// DUY NHẤT 1 PRE-SAVE HOOK – TĂNG CLASSID
+classSchema.pre('save', { document: true, query: false }, async function () {
   try {
     if (this.isNew) {
       const counter = await Counter.findByIdAndUpdate(
@@ -41,9 +40,8 @@ classSchema.pre('save', async function(next) {
       );
       this.classId = counter.seq;
     }
-    next();
   } catch (error) {
-    next(error);
+    throw error;
   }
 });
 

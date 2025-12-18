@@ -1,4 +1,3 @@
-// src/components/ClassTable.jsx
 import { useState, useEffect } from "react";
 import MyPagination from "./Pagination";
 import "../assets/styles/UserTable.css";
@@ -9,7 +8,7 @@ import {
   deleteClass,
   assignStudentToClass,
 } from "../services/classService";
-import { getAllUsers } from "../services/userService"; // Để lấy danh sách học sinh
+import { getAllUsers } from "../services/userService";
 
 export default function ClassTable() {
   const [classes, setClasses] = useState([]);
@@ -27,7 +26,6 @@ export default function ClassTable() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  // Load dữ liệu
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -36,9 +34,7 @@ export default function ClassTable() {
           getAllClasses(),
           getAllUsers(),
         ]);
-
         setClasses(classRes);
-        // Lọc chỉ học sinh để gán lớp
         setStudents(userRes.filter((u) => u.role === "STUDENT"));
       } catch (err) {
         setError("Không thể tải dữ liệu lớp học");
@@ -72,12 +68,11 @@ export default function ClassTable() {
       } else {
         await createClass(formData);
       }
-      // Refresh danh sách lớp
       const updatedClasses = await getAllClasses();
       setClasses(updatedClasses);
       setOpenModal(false);
     } catch (err) {
-      alert("Lỗi khi lưu lớp học: " + (err.message || "Unknown error"));
+      alert("Lỗi khi lưu lớp học");
     }
   };
 
@@ -93,7 +88,7 @@ export default function ClassTable() {
       const updatedClasses = await getAllClasses();
       setClasses(updatedClasses);
     } catch (err) {
-      alert("Gán học sinh thất bại: " + (err.message || ""));
+      alert("Gán học sinh thất bại");
     }
   };
 
@@ -109,7 +104,6 @@ export default function ClassTable() {
 
   return (
     <div className="container py-4">
-      {/* HEADER */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2 className="fw-bold">Quản lý Lớp học</h2>
         <button className="btn btn-purple px-4" onClick={openAdd}>
@@ -117,11 +111,9 @@ export default function ClassTable() {
         </button>
       </div>
 
-      {/* Loading & Error */}
       {loading && <p className="text-center">Đang tải dữ liệu...</p>}
       {error && <p className="text-danger text-center">{error}</p>}
 
-      {/* TABLE */}
       <table className="table table-hover align-middle custom-table">
         <thead className="table-light">
           <tr>
@@ -146,22 +138,13 @@ export default function ClassTable() {
                 <span className="badge bg-success fs-6">{cls.studentCount || 0}</span>
               </td>
               <td>
-                <button
-                  className="btn btn-info btn-sm me-2"
-                  onClick={() => openAssign(cls)}
-                >
+                <button className="btn btn-info btn-sm me-2" onClick={() => openAssign(cls)}>
                   Gán HS
                 </button>
-                <button
-                  className="btn btn-warning btn-sm me-2"
-                  onClick={() => openEdit(cls)}
-                >
+                <button className="btn btn-warning btn-sm me-2" onClick={() => openEdit(cls)}>
                   Sửa
                 </button>
-                <button
-                  className="btn btn-danger btn-sm"
-                  onClick={() => handleDelete(cls.classId)}
-                >
+                <button className="btn btn-danger btn-sm" onClick={() => handleDelete(cls.classId)}>
                   Xóa
                 </button>
               </td>
@@ -170,7 +153,6 @@ export default function ClassTable() {
         </tbody>
       </table>
 
-      {/* Pagination */}
       <div className="d-flex justify-content-center mt-4">
         <MyPagination
           data={classes}
@@ -180,16 +162,10 @@ export default function ClassTable() {
         />
       </div>
 
-      {/* Modal thêm/sửa lớp */}
       {openModal && (
-        <ClassModal
-          onClose={() => setOpenModal(false)}
-          onSubmit={handleSubmit}
-          initialData={editingClass}
-        />
+        <ClassModal onClose={() => setOpenModal(false)} onSubmit={handleSubmit} initialData={editingClass} />
       )}
 
-      {/* Modal gán học sinh */}
       {openAssignModal && (
         <AssignStudentModal
           classData={selectedClass}
@@ -202,7 +178,6 @@ export default function ClassTable() {
   );
 }
 
-/* ------------------- Modal thêm/sửa lớp ------------------- */
 function ClassModal({ onClose, onSubmit, initialData }) {
   const [form, setForm] = useState({
     className: initialData?.className || "",
@@ -255,7 +230,6 @@ function ClassModal({ onClose, onSubmit, initialData }) {
                     onChange={handleChange}
                     className="form-control"
                     rows="3"
-                    placeholder="Mô tả lớp học (tùy chọn)"
                   />
                 </div>
                 <div className="modal-footer">
@@ -275,7 +249,6 @@ function ClassModal({ onClose, onSubmit, initialData }) {
   );
 }
 
-/* ------------------- Modal gán học sinh ------------------- */
 function AssignStudentModal({ classData, students, onAssign, onClose }) {
   const [selectedStudent, setSelectedStudent] = useState("");
 

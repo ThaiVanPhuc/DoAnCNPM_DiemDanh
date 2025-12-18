@@ -1,3 +1,4 @@
+// src/controllers/classController.js
 const Class = require('../models/classModel');
 const User = require('../models/userModel');
 

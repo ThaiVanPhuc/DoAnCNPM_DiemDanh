@@ -1,5 +1,6 @@
 // src/controllers/authController.js
 const User = require("../models/userModel");
+const Class = require("../models/classModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -9,6 +10,13 @@ exports.register = async (req, res) => {
 
     const existingUser = await User.findOne({ email });
     if (existingUser) return res.status(400).json({ message: "Email đã tồn tại" });
+
+    let classObjectId = null;
+    if (classId) {
+      const cls = await Class.findOne({ classId: Number(classId) });
+      if (!cls) return res.status(400).json({ message: "Lớp học không tồn tại" });
+      classObjectId = cls._id;
+    }
 
     const newUser = new User({
       fullName,
@@ -20,11 +28,10 @@ exports.register = async (req, res) => {
       gender: gender || "male",
       birthday,
       role: role || "STUDENT",
-      classId: classId || null
+      classId: classObjectId // Gán ObjectId đúng
     });
 
     await newUser.save();
-    console.log("Đăng ký thành công userId:", newUser.userId); // log để bạn thấy
 
     res.status(201).json({ message: "Đăng ký thành công", userId: newUser.userId });
   } catch (error) {
@@ -60,7 +67,7 @@ exports.login = async (req, res) => {
       }
     });
   } catch (error) {
-    console.error("Lỗi login:", error);
+    console.error(error);
     res.status(500).json({ message: "Lỗi server", error: error.message });
   }
 };
