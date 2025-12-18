@@ -31,8 +31,15 @@ export const assignStudentToClass = async (assignData) => {
   return res.data;
 };
 
-// Xem danh sách học sinh trong lớp (tùy chọn, nếu cần riêng)
+// Xem danh sách học sinh trong lớp
 export const getStudentsInClass = async (classId) => {
   const res = await API.get(`/api/classes/${classId}/students`);
+  return res.data;
+};
+
+// XÓA HỌC SINH KHỎI LỚP (set classId = null cho user)
+export const removeStudentFromClass = async (userId) => {
+  // Backend sẽ xử lý set classId = null
+  const res = await API.put(`/api/users/${userId}`, { classId: null });
   return res.data;
 };
