@@ -1,18 +1,46 @@
 // src/components/AdminSidebar.jsx
 import React from "react";
-import { FaUsers, FaChalkboardTeacher, FaChartBar, FaBars } from "react-icons/fa";
+import {
+  FaUsers,
+  FaChalkboardTeacher,
+  FaChartBar,
+  FaBars,
+  FaClock, // 👈 icon ca học
+} from "react-icons/fa";
 import "../assets/styles/AdminSidebar.css";
 
-export default function AdminSidebar({ activeTab, setActiveTab, isCollapsed, onToggleCollapse }) {
+export default function AdminSidebar({
+  activeTab,
+  setActiveTab,
+  isCollapsed,
+  onToggleCollapse,
+}) {
   const menuItems = [
-    { key: "users", icon: <FaUsers />, label: "Quản lý người dùng" },
-    { key: "classes", icon: <FaChalkboardTeacher />, label: "Quản lý lớp học" },
-    { key: "report", icon: <FaChartBar />, label: "Báo cáo điểm danh" },
+    {
+      key: "users",
+      icon: <FaUsers />,
+      label: "Quản lý người dùng",
+    },
+    {
+      key: "classes",
+      icon: <FaChalkboardTeacher />,
+      label: "Quản lý lớp học",
+    },
+    {
+      key: "shifts", // ✅ THÊM
+      icon: <FaClock />,
+      label: "Quản lý ca học",
+    },
+    {
+      key: "report",
+      icon: <FaChartBar />,
+      label: "Báo cáo điểm danh",
+    },
   ];
 
   return (
     <div className={`admin-sidebar ${isCollapsed ? "collapsed" : ""}`}>
-      {/* Nút collapse/expand */}
+      {/* Nút collapse / expand */}
       <div className="toggle-btn" onClick={onToggleCollapse}>
         <FaBars />
       </div>
