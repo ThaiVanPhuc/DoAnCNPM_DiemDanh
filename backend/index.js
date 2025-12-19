@@ -11,6 +11,9 @@ const authRoutes = require("./src/routes/authRoutes");
 const userRoutes = require("./src/routes/userRoutes");
 const classRoutes = require("./src/routes/classRoutes");
 const attendanceRoutes = require("./src/routes/attendanceRoutes");
+const shilfRoutes = require("./src/routes/shift.routes.js");
+const subjectsRoutes = require("./src/routes/subject.routes.js");
+const teachingschedulessRoutes = require("./src/routes/teachingSchedule.routes.js");
 
 // Import face training routes
 const apiRoutes = require("./src/routes/index");
@@ -18,14 +21,20 @@ const apiRoutes = require("./src/routes/index");
 connectDB();
 
 // CORS configuration
-app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173'],
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:3001",
+      "http://localhost:5173",
+    ],
+    credentials: true,
+  })
+);
 
 // Increased payload limit for base64 images
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ extended: true, limit: '50mb' }));
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 // Routes
 app.use("/auth", authRoutes);
@@ -35,14 +44,15 @@ app.use("/api/attendance", attendanceRoutes);
 
 // Upload ảnh
 const uploadDir = "uploads";
-if (!fs.existsSync(uploadDir)){
-    fs.mkdirSync(uploadDir, { recursive: true });
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
 }
 
 // Cấu hình multer cho legacy upload
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, uploadDir),
-  filename: (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname)),
+  filename: (req, file, cb) =>
+    cb(null, Date.now() + path.extname(file.originalname)),
 });
 const upload = multer({ storage });
 
@@ -61,17 +71,20 @@ app.use("/api", apiRoutes);
 // Các route khác
 app.use("/api/users", userRoutes);
 app.use("/auth", authRoutes);
+app.use("/api/shifts", shilfRoutes);
+app.use("api/subjects", subjectsRoutes);
+app.use("api/teaching-schedules", teachingschedulessRoutes);
 
 app.get("/", (req, res) => {
-  res.json({ 
+  res.json({
     success: true,
     message: "Backend running",
     endpoints: {
       faceTraining: "/api/face-training",
       users: "/api/users",
       auth: "/auth",
-      health: "/health"
-    }
+      health: "/health",
+    },
   });
 });
 
@@ -83,26 +96,26 @@ app.get("/health", (req, res) => {
     timestamp: new Date().toISOString(),
     services: {
       nodejs: "running",
-      python: "check http://localhost:5000"
-    }
+      python: "check http://localhost:5000",
+    },
   });
 });
 
-// ✅ Error handling middleware
+// Error handling middleware
 app.use((err, req, res, next) => {
   console.error("Error:", err);
-  res.status(err.status || 500).json({ 
+  res.status(err.status || 500).json({
     success: false,
     message: err.message || "Internal Server Error",
-    error: process.env.NODE_ENV === 'development' ? err.stack : undefined
+    error: process.env.NODE_ENV === "development" ? err.stack : undefined,
   });
 });
 
 // 404 handler
 app.use((req, res) => {
-  res.status(404).json({ 
+  res.status(404).json({
     success: false,
-    message: `Route ${req.method} ${req.path} not found` 
+    message: `Route ${req.method} ${req.path} not found`,
   });
 });
 
