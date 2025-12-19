@@ -151,3 +151,26 @@
     justify-content: center;
   }
 }
+.auth-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logout-btn {
+  background: #e53935;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #c62828;
+}
+
+.profile-btn {
+  text-decoration: none;
+  color: #1976d2;
+}
