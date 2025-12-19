@@ -2,12 +2,16 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 const connectDB = async () => {
+  if (process.env.NODE_ENV === "test") {
+    console.log("Test mode - Skip real MongoDB connection");
+    return;
+  }
+
   try {
     const conn = await mongoose.connect(
       "mongodb+srv://an100277:AeeReISLciRp5Aqf@binhan.awftk.mongodb.net/DoAnCNPM?appName=binhan"
+      // hoặc dùng process.env.MONGO_URI
     );
-
-    // const conn = await mongoose.connect("mongodb://localhost:27017/");
 
     console.log("MongoDB Connected....", conn.connection.host);
   } catch (error) {
