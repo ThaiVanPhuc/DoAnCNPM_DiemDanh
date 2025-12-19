@@ -1,22 +1,41 @@
 .profile-card {
   max-width: 600px;
-  border-radius: 15px;
+  border-radius: 20px;
   overflow: hidden;
+  box-shadow: 0 15px 40px rgba(106, 90, 205, 0.2);
+}
+
+.profile-header {
+  background: linear-gradient(135deg, #6a5acd, #4836c7);
+  padding: 2rem;
+  text-align: center;
+  color: white;
 }
 
 .profile-avatar {
-    width: 180px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 20px; 
-    border: 3px solid white;
-}
-
-
-.profile-header {
-  position: relative;
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 6px solid white;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
 }
 
 .profile-card .card-body {
-  background: #f8f9fa;
+  padding: 2rem;
+  background: #f8f9ff;
+}
+
+.profile-card .row {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.profile-card .row:last-child {
+  border-bottom: none;
+}
+
+.profile-card .text-muted {
+  font-weight: 600;
+  color: #6a5acd !important;
 }
