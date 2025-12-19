@@ -28,7 +28,7 @@ exports.register = async (req, res) => {
 
     await newUser.save();
 
-    res.status(201).json({ message: "Đăng ký thành công", userId: newUser.userId });
+    res.status(200).json({ message: "Đăng ký thành công", userId: newUser.userId });
   } catch (error) {
     console.error(error); // in lỗi ra console để debug
     res.status(500).json({ message: "Lỗi server", error: error.message });

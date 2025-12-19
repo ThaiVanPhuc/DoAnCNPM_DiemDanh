@@ -7,8 +7,8 @@ import FaceAttendanceApp from "./FaceAttendanceApp.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    {/* <App /> */}
-    <FaceTrainingApp />
-    <FaceAttendanceApp />
+    <App />
+    {/* <FaceTrainingApp />
+    <FaceAttendanceApp /> */}
   </BrowserRouter>
 );
