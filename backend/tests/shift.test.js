@@ -1,3 +1,5 @@
+process.env.NODE_ENV = "test"; 
+
 const request = require("supertest");
 const mongoose = require("mongoose");
 const { MongoMemoryServer } = require("mongodb-memory-server");
@@ -11,13 +13,13 @@ beforeAll(async () => {
   await mongoose.connect(mongoServer.getUri());
 });
 
-afterAll(async () => {
-  await mongoose.disconnect();
-  await mongoServer.stop();
-});
-
 afterEach(async () => {
   await Shift.deleteMany();
+});
+
+afterAll(async () => {
+  await mongoose.connection.close();
+  await mongoServer.stop();
 });
 
 describe("SHIFT API", () => {
