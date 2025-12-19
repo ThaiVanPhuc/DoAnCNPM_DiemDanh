@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, } from "react";
 import InputField from "../components/InputField";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
@@ -6,11 +6,10 @@ import "../assets/styles/LoginPage.css";
 
 export default function RegisterPage() {
   const { register, loading, error } = useAuth();
-  const [classes, setClasses] = useState([]);
   const navigate = useNavigate();
 
   const [success, setSuccess] = useState("");
-  const [errorForm, setErrorForm] = useState(""); // ⬅ thêm state lỗi form
+  const [errorForm, setErrorForm] = useState(""); 
 
   const [form, setForm] = useState({
     fullName: "",
@@ -25,17 +24,7 @@ export default function RegisterPage() {
     classId: "",
   });
 
-  useEffect(() => {
-    const fetchClasses = () => {
-      const mockClasses = [
-        { id: 1, name: "ST22A" },
-        { id: 2, name: "ST22B" },
-        { id: 3, name: "ST22C" },
-      ];
-      setClasses(mockClasses);
-    };
-    fetchClasses();
-  }, []);
+ 
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -148,16 +137,7 @@ export default function RegisterPage() {
             <InputField label="Ảnh đại diện (URL)" type="text" value={form.avatarUrl}
               onChange={handleChange} name="avatarUrl" placeholder="Nhập URL ảnh đại diện" className="transparent-input" />
 
-            <div className="mb-3">
-              <label className="form-label" style={{ color: "#fff" }}>Chọn lớp</label>
-              <select name="classId" className="form-select transparent-input"
-                value={form.classId} onChange={handleChange}>
-                <option value="">-- Chọn lớp --</option>
-                {classes.map(cls => (
-                  <option key={cls.id} value={cls.id}>{cls.name}</option>
-                ))}
-              </select>
-            </div>
+           
           </div>
         </div>
 

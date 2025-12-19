@@ -3,10 +3,12 @@ require("dotenv").config();
 
 const connectDB = async () => {
   try {
-      const conn = await mongoose.connect(
+    const conn = await mongoose.connect(
       "mongodb+srv://an100277:AeeReISLciRp5Aqf@binhan.awftk.mongodb.net/DoAnCNPM?appName=binhan"
     );
-  
+
+    // const conn = await mongoose.connect("mongodb://localhost:27017/");
+
     console.log("MongoDB Connected....", conn.connection.host);
   } catch (error) {
     console.error("MongoDB Connection fail...", error.message);
@@ -15,6 +17,3 @@ const connectDB = async () => {
 };
 
 module.exports = connectDB;
-
-//  const conn = await mongoose.connect(
-//       process.env.MONGO_URI || "mongodb://127.0.0.1:27017/DoAnCNPM"
