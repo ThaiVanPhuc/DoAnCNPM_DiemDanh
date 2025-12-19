@@ -8,6 +8,7 @@ const app = express();
 const connectDB = require("./src/config/db");
 const userRoutes = require("./src/routes/userRoutes");
 const authRoutes = require("./src/routes/authRoutes");
+const shilfRoutes = require("./src/routes/shift.routes");
 
 connectDB();
 
@@ -16,8 +17,8 @@ app.use(express.json());
 
 // Tạo thư mục uploads nếu chưa có
 const uploadDir = "uploads";
-if (!fs.existsSync(uploadDir)){
-    fs.mkdirSync(uploadDir);
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
 }
 
 // Cấu hình multer
@@ -46,9 +47,11 @@ app.use("/uploads", express.static(uploadDir));
 // Các route khác
 app.use("/api/users", userRoutes);
 app.use("/auth", authRoutes);
+app.use("/api/shifts", shilfRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "Backend running" });
 });
 
 app.listen(5000, () => console.log("Backend chạy tại http://localhost:5000"));
+x
