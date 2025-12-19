@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
-import PrivateRoute from "./PrivateRoute"; // ✔ chỉ import 1 lần
+import PrivateRoute from "./PrivateRoute";
 import AdminDashboard from "../pages/AdminDashboard";
 import MyProfilePage from "../pages/MyProfilePage";
 
@@ -23,7 +23,24 @@ function AppRoutes() {
           </PrivateRoute>
         }
       />
+{/* Face Recognition - BẮT BUỘC LOGIN */}
+      <Route
+        path="/training"
+        element={
+          <PrivateRoute>
+            <FaceTrainingApp />
+          </PrivateRoute>
+        }
+      />
 
+      <Route
+        path="/attendance"
+        element={
+          <PrivateRoute>
+            <FaceAttendanceApp />
+          </PrivateRoute>
+        }
+      />
       <Route
         path="/admin/dashboard"
         element={
