@@ -83,6 +83,7 @@ app.get("/", (req, res) => {
   });
 });
 
+<<<<<<< Updated upstream
 // Health check
 app.get("/health", (req, res) => {
   res.json({
@@ -128,3 +129,6 @@ app.listen(PORT, () => {
   console.log(`   - GET  /api/face-training/list-trained-people`);
   console.log("=".repeat(70));
 });
+=======
+app.listen(5000, () => console.log("Backend chạy tại http://localhost:5000"));
+>>>>>>> Stashed changes
