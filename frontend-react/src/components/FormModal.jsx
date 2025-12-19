@@ -7,7 +7,7 @@ export default function FormModal({ onClose, onSubmit, initialData }) {
     email: "",
     password: "",
     phone: "",
-    avatarUrl: "",  // Lưu URL thay vì Base64
+    avatarUrl: "",
     address: "",
     gender: "male",
     birthday: "",
@@ -33,7 +33,6 @@ export default function FormModal({ onClose, onSubmit, initialData }) {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Upload file lên server
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -51,7 +50,6 @@ export default function FormModal({ onClose, onSubmit, initialData }) {
       const data = await res.json();
       setForm((prev) => ({ ...prev, avatarUrl: data.url }));
     } catch (err) {
-      console.error(err);
       alert("Upload ảnh thất bại!");
     } finally {
       setUploading(false);
@@ -65,9 +63,7 @@ export default function FormModal({ onClose, onSubmit, initialData }) {
       classId:
         form.classId === "" || form.classId === null
           ? null
-          : !isNaN(Number(form.classId))
-          ? Number(form.classId)
-          : null,
+          : Number(form.classId),
     };
     onSubmit(payload);
   };
@@ -79,140 +75,59 @@ export default function FormModal({ onClose, onSubmit, initialData }) {
         <div className="modal-dialog modal-lg modal-dialog-centered">
           <div className="modal-content shadow">
             <div className="modal-header">
-              <h5 className="modal-title">{initialData ? "Cập nhật người dùng" : "Thêm người dùng"}</h5>
+              <h5 className="modal-title">
+                {initialData ? "Cập nhật người dùng" : "Thêm người dùng"}
+              </h5>
               <button type="button" className="btn-close" onClick={onClose}></button>
             </div>
-
             <div className="modal-body">
               <form id="user-form" onSubmit={handleSubmit} className="row g-3">
                 <div className="col-12">
-                  <input
-                    name="fullName"
-                    value={form.fullName}
-                    onChange={handleChange}
-                    placeholder="Full Name"
-                    className="form-control"
-                    required
-                  />
+                  <input name="fullName" value={form.fullName} onChange={handleChange} placeholder="Họ và tên" className="form-control" required />
                 </div>
                 <div className="col-12">
-                  <input
-                    name="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    placeholder="Email"
-                    className="form-control"
-                    required
-                  />
+                  <input name="email" value={form.email} onChange={handleChange} placeholder="Email" className="form-control" required />
                 </div>
                 {!initialData && (
                   <div className="col-12">
-                    <input
-                      name="password"
-                      type="password"
-                      value={form.password}
-                      onChange={handleChange}
-                      placeholder="Password"
-                      className="form-control"
-                      required
-                    />
+                    <input name="password" type="password" value={form.password} onChange={handleChange} placeholder="Mật khẩu" className="form-control" required />
                   </div>
                 )}
                 <div className="col-6">
-                  <input
-                    name="phone"
-                    value={form.phone}
-                    onChange={handleChange}
-                    placeholder="Phone"
-                    className="form-control"
-                  />
+                  <input name="phone" value={form.phone} onChange={handleChange} placeholder="Số điện thoại" className="form-control" />
                 </div>
-
-                {/* Avatar */}
                 <div className="col-6">
-                  <input
-                    type="text"
-                    name="avatarUrl"
-                    value={form.avatarUrl}
-                    onChange={handleChange}
-                    placeholder="Avatar URL"
-                    className="form-control mb-2"
-                  />
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                    className="form-control"
-                    disabled={uploading}
-                  />
+                  <input type="text" name="avatarUrl" value={form.avatarUrl} onChange={handleChange} placeholder="Avatar URL" className="form-control mb-2" />
+                  <input type="file" accept="image/*" onChange={handleFileChange} className="form-control" disabled={uploading} />
                   {uploading && <p>Đang upload...</p>}
                   {form.avatarUrl && (
-                    <img
-                      src={form.avatarUrl}
-                      alt="avatar preview"
-                      className="mt-2"
-                      style={{ width: "100px", height: "100px", objectFit: "cover", borderRadius: "50%" }}
-                    />
+                    <img src={form.avatarUrl} alt="preview" style={{ width: "100px", height: "100px", objectFit: "cover", borderRadius: "50%", marginTop: "10px" }} />
                   )}
                 </div>
-
                 <div className="col-12">
-                  <input
-                    name="address"
-                    value={form.address}
-                    onChange={handleChange}
-                    placeholder="Address"
-                    className="form-control"
-                  />
+                  <input name="address" value={form.address} onChange={handleChange} placeholder="Địa chỉ" className="form-control" />
                 </div>
-
                 <div className="col-6">
-                  <select
-                    name="gender"
-                    value={form.gender}
-                    onChange={handleChange}
-                    className="form-select"
-                  >
+                  <select name="gender" value={form.gender} onChange={handleChange} className="form-select">
                     <option value="male">Nam</option>
                     <option value="female">Nữ</option>
                   </select>
                 </div>
-
                 <div className="col-6">
-                  <input
-                    type="date"
-                    name="birthday"
-                    value={form.birthday}
-                    onChange={handleChange}
-                    className="form-control"
-                  />
+                  <input type="date" name="birthday" value={form.birthday} onChange={handleChange} className="form-control" />
                 </div>
-
                 <div className="col-6">
-                  <select
-                    name="role"
-                    value={form.role}
-                    onChange={handleChange}
-                    className="form-select"
-                  >
+                  <select name="role" value={form.role} onChange={handleChange} className="form-select">
                     <option value="STUDENT">Sinh viên</option>
                     <option value="TEACHER">Giáo viên</option>
                     <option value="ADMIN">Quản trị viên</option>
                   </select>
                 </div>
-
                 <div className="col-6">
-                  <input
-                    name="classId"
-                    value={form.classId}
-                    onChange={handleChange}
-                    placeholder="Class ID (nếu là student)"
-                    className="form-control"
-                  />
+                  <input name="classId" value={form.classId} onChange={handleChange} placeholder="Class ID (nếu là student)" className="form-control" />
                 </div>
               </form>
             </div>
-
             <div className="modal-footer">
               <button className="btn btn-secondary" onClick={onClose}>Hủy</button>
               <button type="submit" form="user-form" className="btn btn-primary">

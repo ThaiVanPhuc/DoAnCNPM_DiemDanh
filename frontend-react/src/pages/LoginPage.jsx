@@ -23,7 +23,7 @@ export default function LoginPage() {
       return navigate("/admin/dashboard", { replace: true });
     }
 
-    navigate("/", { replace: true });
+    navigate("/face-training", { replace: true });
 
   } catch (err) {
     console.error(err);
