@@ -42,7 +42,7 @@ export default function AttendanceReport() {
       try {
         const res = await getAttendanceStatistics(filters);
         setStats(res);
-      } catch (err) {
+      } catch  {
         alert("Lỗi tải thống kê");
       } finally {
         setLoading(false);
@@ -68,7 +68,7 @@ export default function AttendanceReport() {
       a.download = `bao-cao-diem-danh.${type}`;
       a.click();
       URL.revokeObjectURL(url);
-    } catch (err) {
+    } catch {
       alert("Xuất file thất bại");
     }
   };
