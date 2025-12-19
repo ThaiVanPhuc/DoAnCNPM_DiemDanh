@@ -11,6 +11,9 @@ const authRoutes = require("./src/routes/authRoutes");
 const userRoutes = require("./src/routes/userRoutes");
 const classRoutes = require("./src/routes/classRoutes");
 const attendanceRoutes = require("./src/routes/attendanceRoutes");
+const shilfRoutes = require("./src/routes/shift.routes.js");
+const subjectsRoutes = require("./src/routes/subject.routes.js");
+const teachingschedulessRoutes = require("./src/routes/teachingSchedule.routes.js");
 
 // Import face training routes
 const apiRoutes = require("./src/routes/index");
@@ -69,6 +72,8 @@ app.use("/api", apiRoutes);
 app.use("/api/users", userRoutes);
 app.use("/auth", authRoutes);
 app.use("/api/shifts", shilfRoutes);
+app.use("api/subjects", subjectsRoutes);
+app.use("api/teaching-schedules", teachingschedulessRoutes);
 
 app.get("/", (req, res) => {
   res.json({
@@ -83,7 +88,6 @@ app.get("/", (req, res) => {
   });
 });
 
-<<<<<<< Updated upstream
 // Health check
 app.get("/health", (req, res) => {
   res.json({
@@ -129,6 +133,3 @@ app.listen(PORT, () => {
   console.log(`   - GET  /api/face-training/list-trained-people`);
   console.log("=".repeat(70));
 });
-=======
-app.listen(5000, () => console.log("Backend chạy tại http://localhost:5000"));
->>>>>>> Stashed changes

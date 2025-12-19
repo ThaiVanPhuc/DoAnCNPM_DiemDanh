@@ -1,8 +1,8 @@
 // controllers/teachingSchedule.controller.js
 const TeachingSchedule = require("../models/TeachingSchedule");
-const User = require("../models/User");
+const User = require("../models/userModel");
 const Shift = require("../models/Shift");
-const checkConflict = require("../utils/checkScheduleConflict");
+const checkConflict = require("../utils/checkShiftConflict");
 
 exports.createSchedule = async (req, res) => {
   const { classId, teacherId, subjectId, shiftId, weekStart, weekEnd } =
@@ -40,4 +40,14 @@ exports.createSchedule = async (req, res) => {
   });
 
   res.status(201).json(schedule);
+};
+
+exports.getAllSchedules = async (req, res) => {
+  const schedules = await TeachingSchedule.find()
+    .populate("classId", "name")
+    .populate("teacherId", "fullName")
+    .populate("subjectId", "name")
+    .populate("shiftId");
+
+  res.json(schedules);
 };

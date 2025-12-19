@@ -20,6 +20,7 @@ const shiftSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    className: String,
     description: String,
   },
   { timestamps: true }
