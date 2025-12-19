@@ -23,3 +23,35 @@
   border-radius: 50%;
   border: 4px solid #6a5acd;
 }
+
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+/* STUDENT */
+.badge-student {
+  background-color: #e3f2fd;   
+  color: #1976d2;
+  border: 1px solid #90caf9;
+}
+
+/* TEACHER */
+.badge-teacher {
+  background-color: #e8f5e9;   
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}
+
+/* ADMIN */
+.badge-admin {
+  background-color: #fdecea;   
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
