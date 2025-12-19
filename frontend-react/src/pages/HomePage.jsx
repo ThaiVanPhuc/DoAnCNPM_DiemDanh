@@ -14,10 +14,10 @@ export default function HomePage() {
 
  return (
     <>
-      <Header />  {/* 🔥 Header được render ở top */}
+      <Header />  
 
       <div className="container d-flex flex-column justify-content-center align-items-center vh-100 text-center">
-        <h2 className="mb-4">Chào mừng {user?.name || "bạn"} đến với trang Home!</h2>
+        <h2 className="mb-4">Welcome to Face Attendance App, {user?.name || "bạn"} !</h2>
         {user?.email && <p className="mb-3">Email của bạn: {user.email}</p>}
 
         <Button text="Đăng xuất" onClick={handleLogout} />

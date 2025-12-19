@@ -1,3 +1,4 @@
+// src/controllers/userController.js
 const User = require("../models/userModel");
 
 // Lấy tất cả user
@@ -88,5 +89,4 @@ module.exports = {
   deleteUserByUserId,
   getAllUsers,
   createUser,
-  assignShiftToUser,
 };

@@ -1,31 +1,30 @@
+// src/routes/userRoutes.js
 const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/userController");
 const authMiddleware = require("../middleware/authMiddleware");
 const roleMiddleware = require("../middleware/roleMiddleware");
+
 router.get("/", authMiddleware, userController.getAllUsers);
 router.get("/:id", authMiddleware, userController.getUserByUserId);
-router.put("/:id", authMiddleware, userController.updateUserByUserId);
 
-// POST, PUT, DELETE → chỉ ADMIN hoặc TEACHER
 router.post(
   "/",
   authMiddleware,
   roleMiddleware(["ADMIN", "TEACHER"]),
   userController.createUser
 );
-router.delete(
+router.put(
   "/:id",
   authMiddleware,
   roleMiddleware(["ADMIN", "TEACHER"]),
-  userController.deleteUserByUserId
+  userController.updateUserByUserId
 );
-
-router.post(
-  "/:userId/shifts",
+router.delete(
+  "/:id",
   authMiddleware,
-  roleMiddleware(["ADMIN", "TEACHER"]),
-  userController.assignShiftToUser
+  roleMiddleware(["ADMIN"]),
+  userController.deleteUserByUserId
 );
 
 module.exports = router;
