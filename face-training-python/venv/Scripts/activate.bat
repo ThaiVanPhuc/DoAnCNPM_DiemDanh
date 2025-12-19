@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\Documents\Web-Programming\DoAnCNPM_DiemDanh\face-training-python\venv
+set VIRTUAL_ENV=D:\DaiHocDongA\FILE_HOC\N3-N4\DACN\DoAnCNPM_DiemDanh\face-training-python\venv
 
 if not defined PROMPT set PROMPT=$P$G
 
