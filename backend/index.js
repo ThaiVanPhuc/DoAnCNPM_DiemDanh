@@ -7,20 +7,21 @@ const fs = require("fs");
 
 const app = express();
 const connectDB = require("./src/config/db.js");
+
+// Routes
 const authRoutes = require("./src/routes/authRoutes");
 const userRoutes = require("./src/routes/userRoutes");
 const classRoutes = require("./src/routes/classRoutes");
 const attendanceRoutes = require("./src/routes/attendanceRoutes");
-const shilfRoutes = require("./src/routes/shift.routes.js");
+const shiftRoutes = require("./src/routes/shift.routes.js");
 const subjectsRoutes = require("./src/routes/subject.routes.js");
-const teachingschedulessRoutes = require("./src/routes/teachingSchedule.routes.js");
-
-// Import face training routes
+const teachingSchedulesRoutes = require("./src/routes/teachingSchedule.routes.js");
 const apiRoutes = require("./src/routes/index");
 
+// Connect DB (sẽ skip khi NODE_ENV=test)
 connectDB();
 
-// CORS configuration
+// CORS
 app.use(
   cors({
     origin: [
@@ -32,7 +33,7 @@ app.use(
   })
 );
 
-// Increased payload limit for base64 images
+// Body limit
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
@@ -41,14 +42,17 @@ app.use("/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/classes", classRoutes);
 app.use("/api/attendance", attendanceRoutes);
+app.use("/api/shifts", shiftRoutes);
+app.use("/api/subjects", subjectsRoutes);
+app.use("/api/teaching-schedules", teachingSchedulesRoutes);
 
-// Upload ảnh
+// Upload folder
 const uploadDir = "uploads";
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
 
-// Cấu hình multer cho legacy upload
+// Multer (legacy upload)
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, uploadDir),
   filename: (req, file, cb) =>
@@ -56,7 +60,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// Endpoint upload ảnh (legacy)
 app.post("/upload", upload.single("file"), (req, res) => {
   if (!req.file) return res.status(400).json({ error: "No file uploaded" });
   const url = `http://localhost:3000/uploads/${req.file.filename}`;
@@ -65,26 +68,14 @@ app.post("/upload", upload.single("file"), (req, res) => {
 
 app.use("/uploads", express.static(uploadDir));
 
-// API Routes - Face Training (MUST BE BEFORE OTHER ROUTES)
+// Face training API
 app.use("/api", apiRoutes);
 
-// Các route khác
-app.use("/api/users", userRoutes);
-app.use("/auth", authRoutes);
-app.use("/api/shifts", shilfRoutes);
-app.use("api/subjects", subjectsRoutes);
-app.use("api/teaching-schedules", teachingschedulessRoutes);
-
+// Root
 app.get("/", (req, res) => {
   res.json({
     success: true,
     message: "Backend running",
-    endpoints: {
-      faceTraining: "/api/face-training",
-      users: "/api/users",
-      auth: "/auth",
-      health: "/health",
-    },
   });
 });
 
@@ -94,24 +85,19 @@ app.get("/health", (req, res) => {
     success: true,
     status: "OK",
     timestamp: new Date().toISOString(),
-    services: {
-      nodejs: "running",
-      python: "check http://localhost:5000",
-    },
   });
 });
 
-// Error handling middleware
+// Error handler
 app.use((err, req, res, next) => {
   console.error("Error:", err);
   res.status(err.status || 500).json({
     success: false,
     message: err.message || "Internal Server Error",
-    error: process.env.NODE_ENV === "development" ? err.stack : undefined,
   });
 });
 
-// 404 handler
+// 404
 app.use((req, res) => {
   res.status(404).json({
     success: false,
@@ -119,17 +105,16 @@ app.use((req, res) => {
   });
 });
 
-// Changed port to 3000 (avoid conflict with Python API on port 5000)
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log("=".repeat(70));
-  console.log(`Node.js Backend running on http://localhost:${PORT}`);
-  console.log(`Upload directory: ${path.resolve(uploadDir)}`);
-  console.log(`Python API should be running on http://localhost:5000`);
-  console.log(`Available endpoints:`);
-  console.log(`   - GET  /health`);
-  console.log(`   - POST /api/face-training/upload-face`);
-  console.log(`   - POST /api/face-training/recognize-face`);
-  console.log(`   - GET  /api/face-training/list-trained-people`);
-  console.log("=".repeat(70));
-});
+
+if (process.env.NODE_ENV !== "test") {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log("=".repeat(70));
+    console.log(`Node.js Backend running on http://localhost:${PORT}`);
+    console.log(`Upload directory: ${path.resolve(uploadDir)}`);
+    console.log(`Python API should be running on http://localhost:5000`);
+    console.log("=".repeat(70));
+  });
+}
+
+module.exports = app;
